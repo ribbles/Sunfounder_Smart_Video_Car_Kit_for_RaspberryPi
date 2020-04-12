@@ -36,10 +36,10 @@ while True:
 
 	while True:
 		data = ''
-		data = tcpCliSock.recv(BUFSIZ)    # Receive data sent from the client. 
+		data = tcpCliSock.recv(BUFSIZ).decode().strip()    # Receive data sent from the client. 
 		# Analyze the command received and control the car accordingly.
 		if not data:
-			break
+			continue
 		if data == ctrl_cmd[0]:
 			print 'motor moving forward'
 			motor.forward()
@@ -115,6 +115,7 @@ while True:
 
 		else:
 			print 'Command Error! Cannot recognize command: ' + data
+	print 'Client exited or error.'
 
 tcpSerSock.close()
 
