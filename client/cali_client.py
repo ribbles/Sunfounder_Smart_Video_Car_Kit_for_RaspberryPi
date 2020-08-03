@@ -27,113 +27,138 @@ forward1 = 'True'
 # Get original offset configuration.
 # =============================================================================
 
+
 def setup():
-	pass
+    pass
 
 # =============================================================================
-# The function is to send the command forward to the server, so as to make the 
+# The function is to send the command forward to the server, so as to make the
 # car move forward.
-# ============================================================================= 
+# =============================================================================
+
+
 def run(event):
-	global runbtn
-	print 'motor ', runbtn
-	if runbtn == 'Stop':
-		tcpCliSock.send('motor_stop')
-		runbtn = 'Run'
-	elif runbtn == 'Run':
-		tcpCliSock.send('motor_run')
-		runbtn = 'Stop'
+    global runbtn
+    print 'motor ', runbtn
+    if runbtn == 'Stop':
+        tcpCliSock.send('motor_stop')
+        runbtn = 'Run'
+    elif runbtn == 'Run':
+        tcpCliSock.send('motor_run')
+        runbtn = 'Stop'
+
 
 def confirm(event):
-	tcpCliSock.send('confirm')
-	
-	top.quit()
-	tcpCliSock.close()
+    tcpCliSock.send('confirm')
 
-#--------motor---------------------
+    top.quit()
+    tcpCliSock.close()
+
+# --------motor---------------------
+
+
 def left_reverse(event):
-	left_cmd = 'leftreverse'
-	tcpCliSock.send(left_cmd)
+    left_cmd = 'leftreverse'
+    tcpCliSock.send(left_cmd)
+
 
 def right_reverse(event):
-	right_cmd = 'rightreverse'
-	tcpCliSock.send(right_cmd)
-#----------------------------------------
+    right_cmd = 'rightreverse'
+    tcpCliSock.send(right_cmd)
+# ----------------------------------------
 
-#---------turing---------------
+# ---------turing---------------
+
+
 def fineturn_left(event):
-	print 'fineturn_left'
-	cmd = 'offset-1'
-	tcpCliSock.send(cmd)
+    print 'fineturn_left'
+    cmd = 'offset-1'
+    tcpCliSock.send(cmd)
+
 
 def fineturn_right(event):
-	print 'fineturn_right'
-	cmd = 'offset+1'
-	tcpCliSock.send(cmd)
+    print 'fineturn_right'
+    cmd = 'offset+1'
+    tcpCliSock.send(cmd)
+
 
 def coarseturn_left(event):
-	print 'coarseturn_left'
-	cmd = 'offset-10'
-	tcpCliSock.send(cmd)
+    print 'coarseturn_left'
+    cmd = 'offset-10'
+    tcpCliSock.send(cmd)
+
 
 def coarseturn_right(event):
-	print 'coarseturn_right'
-	cmd = 'offset+10'
-	tcpCliSock.send(cmd)
-#------------------------------
+    print 'coarseturn_right'
+    cmd = 'offset+10'
+    tcpCliSock.send(cmd)
+# ------------------------------
 
-#-----------mount-----------------
-#-------------x------------------
+# -----------mount-----------------
+# -------------x------------------
+
+
 def finex_left(event):
-	cmd = 'offsetx+1'
-	print cmd
-	tcpCliSock.send(cmd)
+    cmd = 'offsetx+1'
+    print cmd
+    tcpCliSock.send(cmd)
+
 
 def finex_right(event):
-	cmd = 'offsetx-1'
-	print cmd
-	tcpCliSock.send(cmd)
+    cmd = 'offsetx-1'
+    print cmd
+    tcpCliSock.send(cmd)
+
 
 def coarsex_left(event):
-	cmd = 'offsetx+10'
-	print cmd
-	tcpCliSock.send(cmd)
+    cmd = 'offsetx+10'
+    print cmd
+    tcpCliSock.send(cmd)
+
 
 def coarsex_right(event):
-	cmd = 'offsetx-10'
-	print cmd
-	tcpCliSock.send(cmd)
+    cmd = 'offsetx-10'
+    print cmd
+    tcpCliSock.send(cmd)
 
-#---------y-----------------------
+# ---------y-----------------------
+
+
 def finey_down(event):
-	print 'finey_down'
-	cmd = 'offsety-1'
-	tcpCliSock.send(cmd)
+    print 'finey_down'
+    cmd = 'offsety-1'
+    tcpCliSock.send(cmd)
+
 
 def finey_up(event):
-	print 'finey_up'
-	cmd = 'offsety+1'
-	tcpCliSock.send(cmd)
+    print 'finey_up'
+    cmd = 'offsety+1'
+    tcpCliSock.send(cmd)
+
 
 def coarsey_down(event):
-	print 'coarsey_down'
-	cmd = 'offsety-10'
-	tcpCliSock.send(cmd)
+    print 'coarsey_down'
+    cmd = 'offsety-10'
+    tcpCliSock.send(cmd)
+
 
 def coarsey_up(event):
-	print 'coarsey_up'
-	cmd = 'offsety+10'
-	tcpCliSock.send(cmd)
-#--------------------------------
+    print 'coarsey_up'
+    cmd = 'offsety+10'
+    tcpCliSock.send(cmd)
+# --------------------------------
 
 # =============================================================================
-# Exit the GUI program and close the network connection between the client 
+# Exit the GUI program and close the network connection between the client
 # and server.
 # =============================================================================
+
+
 def quit_fun(event):
-	top.quit()
-	tcpCliSock.send('motor_stop')
-	tcpCliSock.close()
+    top.quit()
+    tcpCliSock.send('motor_stop')
+    tcpCliSock.close()
+
 
 # =============================================================================
 # Create buttons on motor
@@ -144,50 +169,50 @@ Btn2 = Button(top, width=5, text='Reverse')
 # =============================================================================
 # Create buttons on mount
 # =============================================================================
-Btn3 = Button(top, width=5, text='<==') # Fine left
-Btn4 = Button(top, width=5, text='==>') # Fine right
-Btn5 = Button(top, width=5, text='<==') # Coarse left
-Btn6 = Button(top, width=5, text='==>')	# Coarse right
-Btn7 = Button(top, width=5, text='<==')	# Fine down
-Btn8 = Button(top, width=5, text='==>')	# Fine up
-Btn9 = Button(top, width=5, text='<==') # Coarse down
-Btn10 = Button(top, width=5, text='==>') # Coarse up
+Btn3 = Button(top, width=5, text='<==')  # Fine left
+Btn4 = Button(top, width=5, text='==>')  # Fine right
+Btn5 = Button(top, width=5, text='<==')  # Coarse left
+Btn6 = Button(top, width=5, text='==>')  # Coarse right
+Btn7 = Button(top, width=5, text='<==')  # Fine down
+Btn8 = Button(top, width=5, text='==>')  # Fine up
+Btn9 = Button(top, width=5, text='<==')  # Coarse down
+Btn10 = Button(top, width=5, text='==>')  # Coarse up
 # =============================================================================
 # Create buttons on turning
 # =============================================================================
-Btn11 = Button(top, width=5, text='<==') # fine left
-Btn12 = Button(top, width=5, text='==>') # fine right
-Btn13 = Button(top, width=5, text='<==') # Coarse left
-Btn14 = Button(top, width=5, text='==>') # Coarse right
+Btn11 = Button(top, width=5, text='<==')  # fine left
+Btn12 = Button(top, width=5, text='==>')  # fine right
+Btn13 = Button(top, width=5, text='<==')  # Coarse left
+Btn14 = Button(top, width=5, text='==>')  # Coarse right
 # =============================================================================
 # Create buttons on top
 # =============================================================================
-Btn15 = Button(top, width=5, text='Cancel')	# cancle
-Btn16 = Button(top, width=5, text='Confirm') # confirm
+Btn15 = Button(top, width=5, text='Cancel')  # cancle
+Btn16 = Button(top, width=5, text='Confirm')  # confirm
 
 # =============================================================================
 # Buttons layout
 # =============================================================================
-Btn0.grid(row=2,column=0)
-Btn1.grid(row=2,column=1)
-Btn2.grid(row=2,column=2)
+Btn0.grid(row=2, column=0)
+Btn1.grid(row=2, column=1)
+Btn2.grid(row=2, column=2)
 
-Btn3.grid(row=2,column=4)
-Btn4.grid(row=2,column=6)
-Btn5.grid(row=3,column=4)
-Btn6.grid(row=3,column=6)
-Btn7.grid(row=5,column=4)
-Btn8.grid(row=5,column=6)
-Btn9.grid(row=6,column=4)
-Btn10.grid(row=6,column=6)
+Btn3.grid(row=2, column=4)
+Btn4.grid(row=2, column=6)
+Btn5.grid(row=3, column=4)
+Btn6.grid(row=3, column=6)
+Btn7.grid(row=5, column=4)
+Btn8.grid(row=5, column=6)
+Btn9.grid(row=6, column=4)
+Btn10.grid(row=6, column=6)
 
-Btn11.grid(row=5,column=0)
-Btn12.grid(row=5,column=2)
-Btn13.grid(row=6,column=0)
-Btn14.grid(row=6,column=2)
+Btn11.grid(row=5, column=0)
+Btn12.grid(row=5, column=2)
+Btn13.grid(row=6, column=0)
+Btn14.grid(row=6, column=2)
 
-Btn15.grid(row=8,column=5)
-Btn16.grid(row=8,column=6)
+Btn15.grid(row=8, column=5)
+Btn16.grid(row=8, column=6)
 
 # =============================================================================
 # Bind the buttons with the corresponding callback function.
@@ -214,7 +239,7 @@ Btn15.bind('<ButtonRelease-1>', quit_fun)
 Btn16.bind('<ButtonRelease-1>', confirm)
 
 # =============================================================================
-# Bind buttons on the keyboard with the corresponding callback function to 
+# Bind buttons on the keyboard with the corresponding callback function to
 # control the car remotely with the keyboard.
 # =============================================================================
 
@@ -257,44 +282,45 @@ label30 = Label(top, text='Turning', fg='red')
 label31 = Label(top, text='=== Fine ===', fg='red')
 label32 = Label(top, text='== Coarse ==', fg='red')
 
-label0.grid(row=0,column=3)
-label1.grid(row=1,column=3)
-label2.grid(row=2,column=3)
-label3.grid(row=3,column=3)
-label4.grid(row=4,column=3)
-label5.grid(row=5,column=3)
-label6.grid(row=6,column=3)
-label7.grid(row=3,column=0)
-label8.grid(row=3,column=1)
-label9.grid(row=3,column=2)
-label10.grid(row=7,column=0)
-label11.grid(row=7,column=1)
-label12.grid(row=7,column=2)
-label13.grid(row=7,column=3)
-label14.grid(row=7,column=4)
-label15.grid(row=7,column=5)
-label16.grid(row=7,column=6)
-label17.grid(row=0,column=1)
-label18.grid(row=1,column=0)
-#label19.grid(row=1,column=1)
-label20.grid(row=1,column=2)
-label21.grid(row=0,column=5)
-label22.grid(row=1,column=4)
-#label23.grid(row=1,column=5)
-label24.grid(row=2,column=5)
-label25.grid(row=3,column=5)
-label26.grid(row=4,column=4)
-#label27.grid(row=4,column=5)
-label28.grid(row=5,column=5)
-label29.grid(row=6,column=5)
-label30.grid(row=4,column=1)
-label31.grid(row=5,column=1)
-label32.grid(row=6,column=1)
+label0.grid(row=0, column=3)
+label1.grid(row=1, column=3)
+label2.grid(row=2, column=3)
+label3.grid(row=3, column=3)
+label4.grid(row=4, column=3)
+label5.grid(row=5, column=3)
+label6.grid(row=6, column=3)
+label7.grid(row=3, column=0)
+label8.grid(row=3, column=1)
+label9.grid(row=3, column=2)
+label10.grid(row=7, column=0)
+label11.grid(row=7, column=1)
+label12.grid(row=7, column=2)
+label13.grid(row=7, column=3)
+label14.grid(row=7, column=4)
+label15.grid(row=7, column=5)
+label16.grid(row=7, column=6)
+label17.grid(row=0, column=1)
+label18.grid(row=1, column=0)
+# label19.grid(row=1,column=1)
+label20.grid(row=1, column=2)
+label21.grid(row=0, column=5)
+label22.grid(row=1, column=4)
+# label23.grid(row=1,column=5)
+label24.grid(row=2, column=5)
+label25.grid(row=3, column=5)
+label26.grid(row=4, column=4)
+# label27.grid(row=4,column=5)
+label28.grid(row=5, column=5)
+label29.grid(row=6, column=5)
+label30.grid(row=4, column=1)
+label31.grid(row=5, column=1)
+label32.grid(row=6, column=1)
+
 
 def main():
-	top.mainloop()
+    top.mainloop()
+
 
 if __name__ == '__main__':
-	setup()
-	main()
-
+    setup()
+    main()

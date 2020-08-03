@@ -4,35 +4,40 @@ import video_dir
 import car_dir
 import motor
 from socket import *
-from time import ctime          # Import necessary modules   
+from time import ctime          # Import necessary modules
 
-ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'read cpu_temp', 'home', 'distance', 'x+', 'x-', 'y+', 'y-', 'xy_home']
+ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop',
+    'read cpu_temp', 'home', 'distance', 'x+', 'x-', 'y+', 'y-', 'xy_home']
 
 busnum = 1          # Edit busnum to 0, if you uses Raspberry Pi 1 or 0
 
-HOST = ''           # The variable of HOST is null, so the function bind( ) can be bound to all valid addresses.
+# The variable of HOST is null, so the function bind( ) can be bound to all valid addresses.
+HOST = ''
 PORT = 21567
 BUFSIZ = 1024       # Size of the buffer
 ADDR = (HOST, PORT)
 
 tcpSerSock = socket(AF_INET, SOCK_STREAM)    # Create a socket.
-tcpSerSock.bind(ADDR)    # Bind the IP address and port number of the server. 
-tcpSerSock.listen(5)     # The parameter of listen() defines the number of connections permitted at one time. Once the 
-                         # connections are full, others will be rejected. 
+tcpSerSock.bind(ADDR)    # Bind the IP address and port number of the server.
+# The parameter of listen() defines the number of connections permitted at one time. Once the
+tcpSerSock.listen(5)
+                         # connections are full, others will be rejected.
 
 video_dir.setup(busnum=busnum)
 car_dir.setup(busnum=busnum)
-motor.setup(busnum=busnum)     # Initialize the Raspberry Pi GPIO connected to the DC motor. 
+# Initialize the Raspberry Pi GPIO connected to the DC motor.
+motor.setup(busnum=busnum)
 video_dir.home_x_y()
 car_dir.home()
 
 while True:
 	print 'Waiting for connection...'
-	# Waiting for connection. Once receiving a connection, the function accept() returns a separate 
-	# client socket for the subsequent communication. By default, the function accept() is a blocking 
+	# Waiting for connection. Once receiving a connection, the function accept() returns a separate
+	# client socket for the subsequent communication. By default, the function accept() is a blocking
 	# one, which means it is suspended before the connection comes.
-	tcpCliSock, addr = tcpSerSock.accept() 
-	print '...connected from :', addr     # Print the IP address of the client connected with the server.
+	tcpCliSock, addr = tcpSerSock.accept()
+	# Print the IP address of the client connected with the server.
+	print '...connected from :', addr
 
 	while True:
 		data = ''
@@ -88,7 +93,7 @@ while True:
 				if spd < 24:
 					spd = 24
 				motor.setSpeed(spd)
-		elif data[0:5] == 'turn=':	#Turning Angle
+		elif data[0:5] == 'turn=':  # Turning Angle
 			print 'data =', data
 			angle = data.split('=')[1]
 			try:

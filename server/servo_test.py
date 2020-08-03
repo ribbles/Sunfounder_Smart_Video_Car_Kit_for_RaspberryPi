@@ -5,9 +5,11 @@ import time                  # Import necessary modules
 MinPulse = 200
 MaxPulse = 700
 
+
 def setup():
     global pwm
     pwm = servo.PWM()
+
 
 def servo_test():
     for value in range(MinPulse, MaxPulse):
@@ -15,6 +17,7 @@ def servo_test():
         pwm.write(14, 0, value)
         pwm.write(15, 0, value)
         time.sleep(0.002)
+
 
 if __name__ == '__main__':
     setup()
