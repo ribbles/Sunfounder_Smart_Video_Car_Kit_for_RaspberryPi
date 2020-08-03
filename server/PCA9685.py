@@ -98,7 +98,7 @@ class PWM(object):
                         print("Error. Pi revision didn't recognize, module number: %s" % line[11:-1])
                         print('Exiting...')
                         quit()
-        except Exception, e:
+        except Exception e:
             f.close()
             print(e)
             print('Exiting...')
