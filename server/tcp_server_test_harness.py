@@ -21,13 +21,13 @@ tcpSerSock.listen(5)
 
 
 while True:
-    print 'Waiting for connection on', HOST, PORT
+    print('Waiting for connection on', HOST, PORT)
     # Waiting for connection. Once receiving a connection, the function accept() returns a separate
     # client socket for the subsequent communication. By default, the function accept() is a blocking
     # one, which means it is suspended before the connection comes.
     tcpCliSock, addr = tcpSerSock.accept()
-    # Print the IP address of the client connected with the server.
-    print '...connected from :', addr
+    # print(the IP address of the client connected with the server.
+    print('...connected from :', addr)
 
     while True:
         # Receive data sent from the client.
@@ -36,64 +36,64 @@ while True:
         if not data:
             break
         if data == ctrl_cmd[0]:
-            print 'motor moving forward'
+            print('motor moving forward')
         elif data == ctrl_cmd[1]:
-            print 'recv backward cmd'
+            print('recv backward cmd')
         elif data == ctrl_cmd[2]:
-            print 'recv left cmd'
+            print('recv left cmd')
         elif data == ctrl_cmd[3]:
-            print 'recv right cmd'
+            print('recv right cmd')
         elif data == ctrl_cmd[6]:
-            print 'recv home cmd'
+            print('recv home cmd')
         elif data == ctrl_cmd[4]:
-            print 'recv stop cmd'
+            print('recv stop cmd')
         elif data == ctrl_cmd[5]:
-            print 'read cpu temp...'
+            print('read cpu temp...')
             temp = 32
             tcpCliSock.send('[%s] %0.2f' % (ctime(), temp))
         elif data == ctrl_cmd[8]:
-            print 'recv x+ cmd'
+            print('recv x+ cmd')
         elif data == ctrl_cmd[9]:
-            print 'recv x- cmd'
+            print('recv x- cmd')
         elif data == ctrl_cmd[10]:
-            print 'recv y+ cmd'
+            print('recv y+ cmd')
         elif data == ctrl_cmd[11]:
-            print 'recv y- cmd'
+            print('recv y- cmd')
         elif data == ctrl_cmd[12]:
-            print 'home_x_y'
+            print('home_x_y')
         elif data[0:5] == 'speed':     # Change the speed
-            print data
+            print(data)
             numLen = len(data) - len('speed')
             if numLen == 1 or numLen == 2 or numLen == 3:
                 tmp = data[-numLen:]
-                print 'tmp(str) = %s' % tmp
+                print('tmp(str) = %s' % tmp)
                 spd = int(tmp)
-                print 'spd(int) = %d' % spd
+                print('spd(int) = %d' % spd)
                 if spd < 24:
                     spd = 24
         elif data[0:5] == 'turn=':  # Turning Angle
-            print 'data =', data
+            print('data =', data)
             angle = data.split('=')[1]
             try:
                 angle = int(angle)
             except:
-                print 'Error: angle =', angle
+                print('Error: angle =', angle)
         elif data[0:8] == 'forward=':
-            print 'data =', data
+            print('data =', data)
             spd = data[8:]
             try:
                 spd = int(spd)
             except:
-                print 'Error speed =', spd
+                print('Error speed =', spd)
         elif data[0:9] == 'backward=':
-            print 'data =', data
+            print('data =', data
             spd = data.split('=')[1]
             try:
                 spd = int(spd)
             except:
-                print 'ERROR, speed =', spd
+                print('ERROR, speed =', spd)
 
         else:
-            print 'Command Error! Cannot recognize command: ' + data
+            print('Command Error! Cannot recognize command: ' + data)
 
 tcpSerSock.close()
