@@ -46,7 +46,7 @@ def move_decrease_x():
     Current_x += 25
     if Current_x > Xmax:
         Current_x = Xmax
-    	pwm.write(14, 0, Current_x)  # CH14 <---> X axis
+        pwm.write(14, 0, Current_x)  # CH14 <---> X axis
 # ==========================================================================================
 # Control the servo connected to channel 14 of the servo control board to make the camera
 # turning towards the negative direction of the x axis.
